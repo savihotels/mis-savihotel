@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("owner@saviregency.in");
-  const [password, setPassword] = useState("ChangeMe@123");
+  const [email, setEmail] = useState("owner@saviregency.com");
+  const [password, setPassword] = useState("Savi@2307");
   const [error, setError] = useState("");
 
   async function submit(e: React.FormEvent) {

@@ -76,8 +76,8 @@ middleware.ts
    ```
 
 ## Demo credentials
-- Admin: `owner@saviregency.in` / `ChangeMe@123`
-- Staff: `staff@saviregency.in` / `ChangeMe@123`
+- Admin: `owner@saviregency.com` / `Savi@2307`
+- Staff: `staff@saviregency.com` / `Savi@123`
 
 ## Reports and analytics endpoints
 - Daily/monthly/yearly dashboard JSON:

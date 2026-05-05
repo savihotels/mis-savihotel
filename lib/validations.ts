@@ -24,6 +24,9 @@ export const reportSchema = z.object({
   restaurantReport: z.string().min(2),
   banquetReport: z.string().min(2),
   cashAccountsReport: z.string().min(2)
+}).refine((data) => data.roomsSold <= data.roomsAvailable, {
+  message: "Rooms sold cannot exceed rooms available",
+  path: ["roomsSold"]
 });
 
 export type ReportInput = z.infer<typeof reportSchema>;

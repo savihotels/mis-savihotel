@@ -1,17 +1,13 @@
-import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
+import Link from "next/link";
 
-export default async function Page() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
-
-  const { data: todos } = await supabase.from("todos").select();
-
+export default function HomePage() {
   return (
-    <ul>
-      {todos?.map((todo) => (
-        <li key={todo.id}>{todo.name}</li>
-      ))}
-    </ul>
+    <main className="container">
+      <h1>Hotel Savi Regency MIS</h1>
+      <p>Single-property dashboard designed for Jaipur operations, expandable to multi-property later.</p>
+      <div className="row">
+        <Link href="/login" className="btn">Login</Link>
+      </div>
+    </main>
   );
 }

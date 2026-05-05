@@ -17,6 +17,20 @@ export async function POST(request: Request) {
 
   const p = parsed.data;
   const dailyTotalSales = p.roomRevenue + p.restaurantRevenue + p.banquetRevenue;
+  let reports;
+
+  try {
+    reports = {
+      frontOfficeReport: JSON.parse(p.frontOfficeReport),
+      expenseReport: JSON.parse(p.expenseReport),
+      purchaseReport: JSON.parse(p.purchaseReport),
+      restaurantReport: JSON.parse(p.restaurantReport),
+      banquetReport: JSON.parse(p.banquetReport),
+      cashAccountsReport: JSON.parse(p.cashAccountsReport)
+    };
+  } catch {
+    return NextResponse.json({ message: "Department report fields must contain valid JSON" }, { status: 400 });
+  }
 
   try {
     const record = await prisma.reportBatch.create({
@@ -38,12 +52,7 @@ export async function POST(request: Request) {
         roomRevenue: p.roomRevenue,
         roomsAvailable: p.roomsAvailable,
         roomsSold: p.roomsSold,
-        frontOfficeReport: JSON.parse(p.frontOfficeReport),
-        expenseReport: JSON.parse(p.expenseReport),
-        purchaseReport: JSON.parse(p.purchaseReport),
-        restaurantReport: JSON.parse(p.restaurantReport),
-        banquetReport: JSON.parse(p.banquetReport),
-        cashAccountsReport: JSON.parse(p.cashAccountsReport)
+        ...reports
       }
     });
 

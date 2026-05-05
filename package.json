@@ -34,5 +34,13 @@
     "prisma": "^5.22.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
+    {
+  "name": "your-app",
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "@supabase/supabase-js": "^2.0.0"
+  }
+}
   }
 }

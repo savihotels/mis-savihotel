@@ -1,10 +1,9 @@
-async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/dashboard?period=monthly`, { cache: "no-store" });
-  return res.json();
-}
+import { getDashboardData } from "@/lib/dashboard";
 
 export default async function InsightsPage() {
-  const data = await getData();
+  const data = await getDashboardData("monthly");
+  if (!data) return <main className="container"><h1>Hotel data not found</h1></main>;
+
   return (
     <main className="container">
       <h1>Management Insights & Alerts</h1>

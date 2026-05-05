@@ -5,7 +5,8 @@ import { subDays } from "date-fns";
 const prisma = new PrismaClient();
 
 async function main() {
-  const passwordHash = await bcrypt.hash("ChangeMe@123", 10);
+  const adminPasswordHash = await bcrypt.hash("Savi@2307", 10);
+  const staffPasswordHash = await bcrypt.hash("Savi@123", 10);
 
   const hotel = await prisma.hotel.upsert({
     where: { code: "HSR-JAIPUR-001" },
@@ -21,26 +22,26 @@ async function main() {
   });
 
   const admin = await prisma.user.upsert({
-    where: { email: "owner@saviregency.in" },
-    update: {},
+    where: { email: "owner@saviregency.com" },
+    update: { passwordHash: adminPasswordHash },
     create: {
       hotelId: hotel.id,
       fullName: "Owner Admin",
-      email: "owner@saviregency.in",
+      email: "owner@saviregency.com",
       role: Role.ADMIN,
-      passwordHash
+      passwordHash: adminPasswordHash
     }
   });
 
   await prisma.user.upsert({
-    where: { email: "staff@saviregency.in" },
-    update: {},
+    where: { email: "staff@saviregency.com" },
+    update: { passwordHash: staffPasswordHash },
     create: {
       hotelId: hotel.id,
       fullName: "FO Staff",
-      email: "staff@saviregency.in",
+      email: "staff@saviregency.com",
       role: Role.STAFF,
-      passwordHash
+      passwordHash: staffPasswordHash
     }
   });
 
